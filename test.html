@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오피스 솔루션 원페이지 카탈로그</title>
+<style>
+    /* 기본 설정 */
+    body { font-family: 'Pretendard', 'Malgun Gothic', sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; }
+    .container { max-width: 1100px; margin: 0 auto; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    
+    /* 헤더 */
+    header { background: linear-gradient(135deg, #1a3c6e 0%, #2563eb 100%); color: white; padding: 50px 20px; text-align: center; }
+    h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; font-weight: 800; }
+    .subtitle { font-size: 1.3rem; margin-top: 15px; color: #e6f0ff; font-weight: 500; }
+    
+    /* 혜택 바 */
+    .benefits { display: flex; justify-content: center; gap: 40px; padding: 25px; background: #eef4fb; border-bottom: 1px solid #ddd; }
+    .benefit-item { font-size: 1.1rem; font-weight: bold; color: #1a3c6e; display: flex; align-items: center; }
+    .benefit-item span { margin-right: 8px; }
+
+    /* ★ 제품 리스트 (수정된 부분: 그리드 레이아웃) ★ */
+    /* 3개의 컬럼을 강제로 고정하여 나란히 배치 */
+    .products { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); /* 1:1:1 비율로 3개 나란히 */
+        gap: 25px; 
+        padding: 50px 30px; 
+    }
+
+    /* 카드 디자인 */
+    .card { 
+        background: white; 
+        border: 1px solid #eee; 
+        border-radius: 15px; 
+        overflow: hidden; 
+        text-align: center; 
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+        transition: transform 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-color: #2563eb; }
+    
+    /* 강조 테두리 (3번 모델) */
+    .highlight-border { border: 2px solid #1a3c6e; position: relative; }
+    
+    /* 뱃지 */
+    .badge { display: inline-block; padding: 6px 16px; border-radius: 0 0 10px 10px; font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 10px; letter-spacing: -0.5px; }
+    .bg-gray { background: #6c757d; }
+    .bg-blue { background: #2563eb; }
+    .bg-red { background: #dc2626; }
+
+    /* 이미지 영역 */
+    .img-placeholder {
+        width: 100%;
+        height: 220px;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #aaa;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #eee;
+    }
+    .img-placeholder img { max-width: 80%; max-height: 90%; object-fit: contain; } /* 실제 이미지 들어갈 때 */
+
+    /* 텍스트 정보 */
+    .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+    .card-title { font-size: 1.3rem; font-weight: bold; color: #222; margin-bottom: 5px; }
+    .card-model { color: #666; font-size: 0.95rem; margin-bottom: 15px; font-weight: 500; }
+    
+    .price-box { background: #f1f3f5; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+    .price { font-size: 1.6rem; font-weight: 900; color: #1a3c6e; letter-spacing: -1px; }
+    .vat { font-size: 0.8rem; color: #777; display: block; margin-top: 5px; }
+    
+    /* 스펙 리스트 */
+    .specs { text-align: left; font-size: 0.9rem; color: #444; line-height: 1.8; background: #fff; }
+    .specs ul { padding-left: 0; list-style: none; margin: 0; }
+    .specs li { border-bottom: 1px solid #f0f0f0; padding: 8px 0; display: flex; justify-content: space-between; }
+    .specs li:last-child { border-bottom: none; }
+    .specs strong { color: #222; }
+
+    /* 푸터 */
+    footer { background: #222; color: white; padding: 40px 20px; text-align: center; }
+    .contact-main { font-size: 2rem; font-weight: bold; margin-bottom: 10px; color: #ffe600; }
+    .contact-sub { font-size: 1.2rem; margin-bottom: 20px; color: #ddd; }
+    .btn-cta { display: inline-block; padding: 15px 40px; background: #ffe600; color: #222; font-weight: bold; text-decoration: none; border-radius: 50px; font-size: 1.1rem; transition: 0.2s; }
+    .btn-cta:hover { background: #fff; }
+
+    /* 모바일 반응형 (화면이 너무 좁을때만 세로로 변경) */
+    @media (max-width: 768px) {
+        .products { grid-template-columns: 1fr; } /* 모바일에서는 1단 */
+        .benefits { flex-direction: column; gap: 10px; text-align: center; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>2026 신한 오엔씨 복합기 특가</h1>
+        <div class="subtitle">초기 비용 0원! 설치부터 관리까지 완벽 책임</div>
+    </header>
+
+    <div class="benefits">
+        <div class="benefit-item"><span>💰</span> 보증금 0원</div>
+        <div class="benefit-item"><span>🖨️</span> 토너 무상 제공</div>
+        <div class="benefit-item"><span>🛠️</span> 당일 무료 설치</div>
+        <div class="benefit-item"><span>📅</span> 4년 약정 기준</div>
+    </div>
+
+    <div class="products">
+        
+        <div class="card">
+            <div style="background:#555; height:5px;"></div> <span class="badge bg-gray" style="align-self:center; margin-top:-1px;">TYPE 01. 흑백 실속형</span>
+            
+            <div class="img-placeholder">
+                <img src="128DN.jpg" alt="bizhub 128DN 사진">
+            </div>
+
+            <div class="card-body">
+                <div class="card-title">경제적인 선택</div>
+                <div class="card-model">bizhub 128DN</div>
+                
+                <div class="price-box">
+                    <div class="price">99,000원</div>
+                    <span class="vat">VAT 포함 / 팩스 별도</span>
+                </div>
+
+                <div class="specs">
+                    <ul>
+                        <li><strong>속도</strong> <span>분당 28매</span></li>
+                        <li><strong>기본매수</strong> <span>흑백 3,000매</span></li>
+                        <li><strong>추가요금</strong> <span>흑백 10원</span></li>
+                        <li><strong>기능</strong> <span>복사/출력/스캔/A3</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div style="background:#2563eb; height:5px;"></div>
+            <span class="badge bg-blue" style="align-self:center; margin-top:-1px;">TYPE 02. 컬러 입문형</span>
+            
+            <div class="img-placeholder">
+               <img src="325DNI.jpg" alt="bizhub 325DNI 사진">
+            </div>
+
+            <div class="card-body">
+                <div class="card-title">스마트 컬러</div>
+                <div class="card-model">bizhub c325DNi</div>
+                
+                <div class="price-box">
+                    <div class="price">132,000원</div>
+                    <span class="vat">VAT 포함 / 팩스 별도</span>
+                </div>
+
+                <div class="specs">
+                    <ul>
+                        <li><strong>속도</strong> <span>분당 25매</span></li>
+                        <li><strong>기본매수</strong> <span>흑 5,000 / 컬 500</span></li>
+                        <li><strong>추가요금</strong> <span>흑 11원 / 컬 110원</span></li>
+                        <li><strong>기능</strong> <span>컬러/복사/스캔/A3</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card highlight-border">
+            <div style="background:#dc2626; height:5px;"></div>
+            <span class="badge bg-red" style="align-self:center; margin-top:-1px;">TYPE 03. 강력 추천</span>
+            
+            <div class="img-placeholder">
+                <img src="ac3060.png" alt="Apeos C3060 사진">
+            </div>
+
+            <div class="card-body">
+                <div class="card-title" style="color:#d32f2f;">고성능 프리미엄</div>
+                <div class="card-model">FUJIFILM Apeos C3060</div>
+                
+                <div class="price-box" style="background:#fff0f0; border:1px solid #ffcdd2;">
+                    <div class="price" style="color:#d32f2f;">132,000원</div>
+                    <span class="vat" style="color:#d32f2f;">VAT 포함 / 팩스 별도</span>
+                </div>
+
+                <div class="specs">
+                    <ul>
+                        <li><strong>속도</strong> <span style="color:#d32f2f; font-weight:bold;">분당 30매 (Fast)</span></li>
+                        <li><strong>기본매수</strong> <span>흑 5,000 / 컬 500</span></li>
+                        <li><strong>추가요금</strong> <span>흑 11원 / 컬 110원</span></li>
+                        <li><strong>기능</strong> <span>컬러/복사/스캔/A3</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer>
+        <p style="margin:0; opacity:0.8; font-size:0.9rem;">복합기 렌탈 상담 문의</p>
+        <div class="contact-main">☎ 1660-3204</div>
+        <div class="contact-sub">Phone : 010-7446-7540</div>
+        <a href="tel:16003204" class="btn-cta">지금 바로 상담하기</a>
+        <p style="margin-top:30px; font-size:0.8rem; color:#888;">
+            무료 설치 | 무상 A/S | 토너 무상 제공 | 4년 약정 기준<br>
+            팩스 기능 추가 시 월 11,000원 추가
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>
